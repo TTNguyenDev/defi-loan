@@ -2,13 +2,12 @@ package keeper
 
 import (
 	"fmt"
+	"loan/x/loan/types"
 
 	"cosmossdk.io/core/store"
 	"cosmossdk.io/log"
 	"github.com/cosmos/cosmos-sdk/codec"
 	sdk "github.com/cosmos/cosmos-sdk/types"
-
-	"loan/x/loan/types"
 )
 
 type (
