@@ -20,6 +20,7 @@ service Msg {
   rpc RequestLoan  (MsgRequestLoan ) returns (MsgRequestLoanResponse );
   rpc ApproveLoan  (MsgApproveLoan ) returns (MsgApproveLoanResponse );
   rpc RepayLoan    (MsgRepayLoan   ) returns (MsgRepayLoanResponse   );
+  rpc Liquidate    (MsgLiquidate   ) returns (MsgLiquidateResponse   );
 }
 // MsgUpdateParams is the Msg/UpdateParams request type.
 message MsgUpdateParams {
@@ -65,4 +66,12 @@ message MsgRepayLoan {
 }
 
 message MsgRepayLoanResponse {}
+
+message MsgLiquidate {
+  option (cosmos.msg.v1.signer) = "creator";
+  string creator = 1;
+  uint64 id      = 2;
+}
+
+message MsgLiquidateResponse {}
 
