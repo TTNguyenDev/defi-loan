@@ -4,7 +4,9 @@ import (
 	"context"
 	"loan/x/loan/types"
 
+	errorsmod "cosmossdk.io/errors"
 	sdk "github.com/cosmos/cosmos-sdk/types"
+	sdkerrors "github.com/cosmos/cosmos-sdk/types/errors"
 )
 
 func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan) (*types.MsgRequestLoanResponse, error) {
@@ -24,12 +26,14 @@ func (k msgServer) RequestLoan(goCtx context.Context, msg *types.MsgRequestLoan)
 	}
 	collateral, err := sdk.ParseCoinsNormalized(loan.Collateral)
 	if err != nil {
-		panic(err)
+		return nil, errorsmod.Wrapf(sdkerrors.ErrUnauthorized, "%v", err)
 	}
+
 	sdkError := k.bankKeeper.SendCoinsFromAccountToModule(ctx, borrower, types.ModuleName, collateral)
 	if sdkError != nil {
-		return nil, sdkError
+		return nil, errorsmod.Wrapf(sdkerrors.ErrUnauthorized, "%v", sdkError)
 	}
+
 	k.AppendLoan(ctx, loan)
 
 	return &types.MsgRequestLoanResponse{}, nil

@@ -50,5 +50,6 @@ func (msg *MsgRequestLoan) ValidateBasic() error {
 	if collateral.Empty() {
 		return errorsmod.Wrap(sdkerrors.ErrInvalidRequest, "collateral is empty")
 	}
+
 	return nil
 }
