@@ -12,4 +12,7 @@ var (
 	ErrSample        = sdkerrors.Register(ModuleName, 1101, "sample error")
 )
 
-var ErrWrongLoanState = sdkerrors.Register(ModuleName, 2, "wrong loan state")
+var (
+	ErrWrongLoanState = sdkerrors.Register(ModuleName, 2, "wrong loan state")
+	ErrDeadline       = sdkerrors.Register(ModuleName, 3, "deadline")
+)
