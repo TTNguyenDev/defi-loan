@@ -18910,6 +18910,46 @@ paths:
               parameters.
       tags:
         - Msg
+  /loan.loan.Msg/ApproveLoan:
+    post:
+      operationId: LoanLoanMsg_ApproveLoan
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            type: object
+            properties:
+              creator:
+                type: string
+              id:
+                type: string
+                format: uint64
+      tags:
+        - Msg
   /loan.loan.Msg/RequestLoan:
     post:
       operationId: LoanLoanMsg_RequestLoan
@@ -26871,6 +26911,16 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
+  loan.loan.MsgApproveLoan:
+    type: object
+    properties:
+      creator:
+        type: string
+      id:
+        type: string
+        format: uint64
+  loan.loan.MsgApproveLoanResponse:
+    type: object
   loan.loan.MsgRequestLoan:
     type: object
     properties:
